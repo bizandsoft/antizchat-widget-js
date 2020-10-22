@@ -1,0 +1,126 @@
+{
+	"widget": {
+		"name": "widget.name",
+		"description": "widget.description",
+		"short_description": "widget.short_description",
+		"version": "0.91",
+		"interface_version": 2,
+		"init_once": false,
+		"locale": [
+			"ru"
+		],
+		"installation": true,
+		"support": {
+			"link": "https://bizandsoft.ru/",
+			"email": "amocrm@bizandsoft.ru"
+		}
+	},
+	"tour": {
+		"is_tour": true,
+		"tour_images": {
+			"ru": [
+				"/images/tour_1_ru.png"
+			]
+		},
+		"tour_description": "widget.tour_description"
+	},
+	"locations": [
+		"lcard-1",
+		"settings",
+		"digital_pipeline",
+		"everywhere"
+	],
+	"dp": {
+	"action_multiple": true,
+	"webhook_url": "https://wdg.biz-crm.ru/antizchat/webhook",
+	"settings": {
+			"entity": {
+					"name": "settings.entity",
+					"type": "text",
+					"required": false
+			},
+			"date_deadline": {
+					"name": "settings.date_deadline",
+					"type": "text",
+					"required": false
+			},
+			"date_deadline_day": {
+					"name": "settings.date_deadline_day",
+					"type": "text",
+					"required": false
+			},
+			"account_year": {
+					"name": "settings.account_year",
+					"type": "text",
+					"required": false
+			},
+			"time_deadline_field": {
+					"name": "settings.time_deadline_field",
+					"type": "text",
+					"required": false
+			},
+			"time_deadline_absolute": {
+					"name": "settings.time_deadline_absolute",
+					"type": "text",
+					"required": false
+			},
+			"time_deadline_absolute_to": {
+					"name": "settings.time_deadline_absolute_to",
+					"type": "text",
+					"required": false
+			},
+			"time_deadline_hour": {
+					"name": "settings.time_deadline_hour",
+					"type": "text",
+					"required": false
+			},
+			"time_deadline_minute": {
+					"name": "settings.time_deadline_minute",
+					"type": "text",
+					"required": false
+			},
+			"time_deadline_cf_minute": {
+					"name": "settings.time_deadline_cf_minute",
+					"type": "text",
+					"required": false
+			},
+			"time_deadline_cf_rule": {
+					"name": "settings.time_deadline_cf_rule",
+					"type": "text",
+					"required": false
+			},
+			"time_rule": {
+					"name": "settings.time_rule",
+					"type": "text",
+					"required": false
+			},
+			"user_id": {
+					"name": "settings.user_id",
+					"type": "text",
+					"required": false
+			},
+			"task_type": {
+					"name": "settings.task_type",
+					"type": "text",
+					"required": false
+			},
+			"comment": {
+					"name": "settings.comment",
+					"type": "text",
+					"required": false
+			}
+	}
+},
+	"settings": {
+		"customer": {
+			"name": "settings.customer",
+			"type": "text",
+			"required": false
+		},
+		"partner": {
+			"name": "settings.partner",
+			"type": "text",
+			"required": false
+		}
+	}
+}
