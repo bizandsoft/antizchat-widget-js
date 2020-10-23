@@ -165,8 +165,8 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 		};
 
 		self.deadlineTimeRuleHide = function() {
-				if ($(".control--select-time__rule:visible").length > 0) {
-						$(".control--select-time__rule").hide().find("input").val("");
+				if ($(".control-select-timerule:visible").length > 0) {
+						$(".control-select-timerule").hide().find("input").val("");
 				}
 		};
 
@@ -227,12 +227,7 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 				var dp = $(".digital-pipeline__short-task_widget-style_" + self.w_code).parent().parent();
 
 					var val_entity = dp.find('input[name="entity"]').val();
-
 					var val_entity_lead_active = dp.find('input[name="entity_lead_active"]').val();
-
-					var val_date_deadline = dp.find('input[name="date_deadline"]').val();
-					var val_date_deadline_day = dp.find('input[name="date_deadline_day"]').val();
-					var val_account_year = dp.find('input[name="account_year"]').val();
 					var val_time_deadline_field = dp.find('input[name="time_deadline_field"]').val();
 					var val_time_deadline_absolute = dp.find('input[name="time_deadline_absolute"]').val();
 					var val_time_deadline_absolute_to = dp.find('input[name="time_deadline_absolute_to"]').val();
@@ -241,10 +236,8 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 					var val_time_deadline_cf_minute = dp.find('input[name="time_deadline_cf_minute"]').val();
 					var val_time_deadline_cf_rule = dp.find('input[name="time_deadline_cf_rule"]').val();
 					var val_time_rule = dp.find('input[name="time_rule"]').val();
-
 					var val_user_id = dp.find('input[name="user_id"]').val();
 					var val_task_type = dp.find('input[name="task_type"]').val();
-
 					var val_comment = dp.find('input[name="comment"]').val();
 
 					var timeRule = {};
@@ -257,31 +250,23 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 					var times = new Inputmask("99:99-99:99", {
 							clearIncomplete: true
 					});
-
 					var template_time_rule = "";
-					var week_days = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
-					var index = 1;
-					for (var _day of week_days) {
-						var time = "";
-						var duration = "";
-						if (timeRule.hasOwnProperty(index)) {
-							time = timeRule[index].time;
-							duration = timeRule[index].duration;
+						var week_days = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
+						var index = 1;
+						for (var _day of week_days) {
+							var time = "";
+							var duration = "";
+							if (timeRule.hasOwnProperty(index)) {
+								time = timeRule[index].time;
+								duration = timeRule[index].duration;
+							}
+							template_time_rule += '<li class="control--select--rule--item" data-day="' + index + '">' +
+									'<span class="item--label--rule__day">' + _day + '</span>' +
+									'<input type="text" name="time[rule][]" placeholder="10:00-19:00" value="' + time + '" class="input-linked-rule__time js-control-input-time_rule">' +
+									'<input type="text" name="time[duration][]" placeholder="..." value="' + duration + '" class="input-linked-rule__duration js-control-allow-numeric js-control-input-time_rule">' +
+							'</li>';
+						index++;
 						}
-						template_time_rule += '<li class="control--select--rule--item" data-day="' + index + '">' +
-								'<span class="item--label--rule__day">' + _day + '</span>' +
-								'<input type="text" name="time[rule][]" placeholder="10:00-19:00" value="' + time + '" class="input-linked-rule__time js-control-input-time_rule">' +
-								'<input type="text" name="time[duration][]" placeholder="..." value="' + duration + '" class="input-linked-rule__duration js-control-allow-numeric js-control-input-time_rule">' +
-						'</li>';
-					index++;
-					}
-
-					var template_tag = "";
-					var custom_fields = AMOCRM.constant("account").cf;
-					var date_field_options = [{
-							id: "",
-							option: "В момент события"
-					}];
 					var time_field_options = [{
 							id: "during",
 							option: "В течение",
@@ -295,32 +280,7 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 							option: "Указать время",
 							is_system: true
 					}];
-					var tag_options = [{
-						id: "contact.id",
-						option: "ID контакта"
-					},{
-						id: "contact.name",
-						option: "Имя контакта"
-					},{
-						id: "contact.phone",
-						option: "Телефон контакта"
-					},{
-						id: "lead.id",
-						option: "ID сделки"
-					},{
-						id: "lead.name",
-						option: "Имя сделки"
-					}];
-
-					for (var tags of tag_options) {
-						template_tag += '<div class="item-linked__cf_dp_tags">' +
-								'<span class="title-linked__cf_dp_tags js-copy-cf__dp_tag" title="{{' + tags.id + '}}">{{' + tags.id + '}}</span>' +
-								'<span> - ' + tags.option + '</span>' +
-							'</div>';
-					}
-
-
-
+		
 					var users = AMOCRM.constant('managers');
 					var user_options = [{
 							id: "current",
@@ -339,13 +299,7 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 									});
 							}
 					}
-
-					var amoBig = AMOCRM;
-
-					var todoTypes = AMOCRM.todo_types;
-
 					var task_types = AMOCRM.constant('task_types');
-
 					var task_types_options = [{
 							id: 1,
 							option: "Связаться с клиентом"
@@ -372,25 +326,15 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 
 					dp.find('#widget_settings__fields_wrapper').html('<div class="dp_settings_' + self.w_code + '">' +
 						'<style type="text/css">' +
-									'.dp_settings_' + self.w_code + ' .widget-wrapper_fields_date {' +
-											'display: flex;' +
-											'align-items: center;' +
-									'}' +
-									'.dp_settings_' + self.w_code + ' .title-linked__cf_dp_tags {' +
-											'border-bottom: 1px dotted #1375ab;' +
-											'color: #1375ab;' +
-											'cursor: pointer;' +
+									'.dp_settings_' + self.w_code + ' .widget-wrapper_fd {' +
+										'display: flex;' +
+										'align-items: center;' +
 									'}' +
 									'.dp_settings_' + self.w_code + ' .select_time-deadline-absolute {' +
-											'display: flex;' +
-											'align-items: center;' +
+										'display: flex;' +
+										'align-items: center;' +
 									'}' +
-									'.dp_settings_' + self.w_code + ' .items-wrap-cf_dp_tags {' +
-											'height: 75px;' +
-											'overflow: auto;' +
-											'white-space: nowrap;' +
-									'}' +
-									'.dp_settings_' + self.w_code + ' .control--select--overlay {' +
+									'.dp_settings_' + self.w_code + ' .control-select-overlay {' +
 										'display: none;' +
 										'position: fixed;' +
 										'top: 0;' +
@@ -399,28 +343,28 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 										'left: 0;' +
 										'z-index: 100;' +
 									'}' +
-									'.dp_settings_' + self.w_code + ' .control--select-time__rule {' +
-											'position: relative;' +
-											'height: 36px;' +
-											'width: 158px;' +
-											'color: #2e3640;' +
-											'box-sizing: border-box;' +
-											'margin-left: 10px;' +
-											'z-index: 10;' +
+									'.dp_settings_' + self.w_code + ' .control-select-timerule {' +
+										'position: relative;' +
+										'height: 36px;' +
+										'width: 158px;' +
+										'color: #2e3640;' +
+										'box-sizing: border-box;' +
+										'margin-left: 10px;' +
+										'z-index: 10;' +
 									'}' +
-									'.dp_settings_' + self.w_code + ' .list-linked-time__rule {' +
-				'display: none;' +
-				'position: absolute;' +
-				'bottom: 0;' +
-				'left: 0;' +
-				'width: 100%;' +
-				'border: 1px solid #d4d5d8;' +
-				'border-radius: 3px;' +
-				'background-color: #fff;' +
-				'height: auto;' +
-				'z-index: 101;' +
+									'.dp_settings_' + self.w_code + ' .list-linked-timerule {' +
+										'display: none;' +
+										'position: absolute;' +
+										'bottom: 0;' +
+										'left: 0;' +
+										'width: 100%;' +
+										'border: 1px solid #d4d5d8;' +
+										'border-radius: 3px;' +
+										'background-color: #fff;' +
+										'height: auto;' +
+										'z-index: 101;' +
 									'}' +
-									'.dp_settings_' + self.w_code + ' .control--select--rule--item {' +
+									'.dp_settings_' + self.w_code + ' .control-select-rule-item {' +
 										'display: flex;' +
 										'align-items: center;' +
 										'list-style-type: none;' +
@@ -428,29 +372,26 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 										'overflow: hidden;' +
 										'box-sizing: border-box;' +
 									'}' +
-									'.dp_settings_' + self.w_code + ' .item--label--rule__day {' +
-					'width: 18px;' +
+									'.dp_settings_' + self.w_code + ' .input-linked-rule_time {' +
+										'width: 90px;' +
+										'padding: 5px;' +
+										'margin: 0 3px;' +
+										'height: 30px;' +
+										'border: 1px solid #dbdedf;' +
+										'border-radius: 3px;' +
+										'box-sizing: border-box;' +
+										'color: #313942;' +
+										'background: #fff;' +
 									'}' +
-									'.dp_settings_' + self.w_code + ' .input-linked-rule__time {' +
-					'width: 90px;' +
-					'padding: 5px;' +
-					'margin: 0 3px;' +
-					'height: 30px;' +
-					'border: 1px solid #dbdedf;' +
-					'border-radius: 3px;' +
-					'box-sizing: border-box;' +
-					'color: #313942;' +
-					'background: #fff;' +
+									'.dp_settings_' + self.w_code + ' .input-linked-rule_duration {' +
+										'height: 30px;' +
+										'width: 26px;' +
+										'box-sizing: border-box;' +
+										'color: #313942;' +
+										'background: #fff;' +
+										'border-bottom: 1px solid #2A95CC;' +
 									'}' +
-									'.dp_settings_' + self.w_code + ' .input-linked-rule__duration {' +
-					'height: 30px;' +
-					'width: 26px;' +
-					'box-sizing: border-box;' +
-					'color: #313942;' +
-					'background: #fff;' +
-					'border-bottom: 1px solid #2A95CC;' +
-									'}' +
-									'.dp_settings_' + self.w_code + ' .button--select-time__rule {' +
+									'.dp_settings_' + self.w_code + ' .button--select-time_rule {' +
 										'background: #fff;' +
 										'box-sizing: border-box;' +
 										'display: inline-block;' +
@@ -464,21 +405,13 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 										'padding-left: 10px;' +
 										'text-align: left;' +
 									'}' +
-									'.dp_settings_' + self.w_code + ' .input-deadline-inner__small {' +
+									'.dp_settings_' + self.w_code + ' .input-deadline-inner_small {' +
 											'padding-right: 18px;' +
 									'}' +
-									'.dp_settings_' + self.w_code + ' .input-deadline-inner__small::placeholder {' +
+									'.dp_settings_' + self.w_code + ' .input-deadline-inner_small::placeholder {' +
 											'font-size: 14px;' +
 									'}' +
-									'.dp_settings_' + self.w_code + ' .form-field-linked--trait {' +
-											'position: absolute;' +
-											'height: 22px;' +
-											'width: 1.5px;' +
-											'background-color: #cdcdcd;' +
-											'top: -21px;' +
-											'left: 15px;' +
-									'}' +
-							'</style>' +
+								'</style>' +
 							'<div class="form-group">' +
 									self.render({ ref: "/tmpl/controls/select.twig" }, {
 											items: [{
@@ -498,54 +431,7 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 											selected_before: "Создавать задачу для: "
 									}) +
 							'</div>' +
-							'<div class="form-group widget-wrapper_fields_date">' +
-									self.render({ ref: "/tmpl/controls/select.twig" }, {
-											items: date_field_options,
-											name: "date_deadline",
-											class_name: "js-control-task_date_select",
-											additional_data: 'style="margin-top: 0;flex-grow: 1;"',
-											selected: val_date_deadline,
-											selected_before: "Дата выполнения задачи: "
-									}) +
-									'<div class="deadline_select__input" style="margin-left: 10px; margin-right: 0;">' +
-											self.render({ ref: "/tmpl/controls/select.twig" }, {
-													items: [{
-															id: "0",
-															option: "+0д"
-													},{
-															id: "1",
-															option: "+1д"
-													},{
-															id: "2",
-															option: "+2д"
-													},{
-															id: "3",
-															option: "+3д"
-													}],
-													name: "date_deadline_day",
-													class_name: "js-control-date-deadline_number",
-													additional_data: 'margin-top: 0;"',
-													selected: val_date_deadline_day
-											}) +
-									'</div>' +
-							'</div>' +
-							'<div class="form-group linked-item__task-action__account_year" style="position: relative; display: ' + (val_date_deadline === "" ? "none" : "block") + ';">' +
-									'<div class="form-field-linked--trait"></div>' +
-									self.render({ ref: "/tmpl/controls/select.twig" }, {
-											items: [{
-													id: 1,
-													option: "Да"
-											},{
-													id: 0,
-													option: "Нет"
-											}],
-											name: "account_year",
-											additional_data: 'style="margin-top: 0;flex-grow: 1;"',
-											selected: val_account_year === "" ? 1 : val_account_year,
-											selected_before: "Учитывать год: "
-									}) +
-							'</div>' +
-							'<div class="form-group widget-wrapper_fields_date">' +
+							'<div class="form-group widget-wrapper_fd">' +
 									self.render({ ref: "/tmpl/controls/select.twig" }, {
 											items: time_field_options,
 											name: "time_deadline_field",
@@ -660,18 +546,18 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 									'</div>' +
 									'<div class="control--field-time__cf" style="display: ' + (is_time_system_selected ? "none" : "block") + ';">' +
 											'<div class="deadline_select__input" style="margin-left: 10px;">' +
-													'<input name="time_deadline_cf_minute" class="text-input input-deadline-inner__small js-control-date-deadline_number" type="text" placeholder="+/-10" value="' + val_time_deadline_cf_minute + '" maxlength="4" autocomplete="off">' +
+													'<input name="time_deadline_cf_minute" class="text-input input-deadline-inner_small js-control-date-deadline_number" type="text" placeholder="+/-10" value="' + val_time_deadline_cf_minute + '" maxlength="4" autocomplete="off">' +
 													'<span class="deadline_select__input_descr">м</span>' +
 											'</div>' +
 											'<div class="deadline_select__input" style="margin-right: 0;">' +
-													'<input name="time_deadline_cf_rule" class="text-input input-deadline-inner__small js-control-allow-numeric" type="text" placeholder="в теч." value="' + val_time_deadline_cf_rule + '" maxlength="3" autocomplete="off">' +
+													'<input name="time_deadline_cf_rule" class="text-input input-deadline-inner_small js-control-allow-numeric" type="text" placeholder="в теч." value="' + val_time_deadline_cf_rule + '" maxlength="3" autocomplete="off">' +
 													'<span class="deadline_select__input_descr">м</span>' +
 											'</div>' +
 									'</div>' +
-									'<div class="control--select-time__rule" style="display: ' + (val_time_deadline_field == "time_rule" ? "block" : "none") + ';">' +
-										'<div class="control--select--overlay"></div>' +
-										'<ul class="list-linked-time__rule">' + template_time_rule + '</ul>' +
-										'<button class="button--select-time__rule js-control-button-time__rule" tabindex="" type="button">' +
+									'<div class="control-select-timerule" style="display: ' + (val_time_deadline_field == "time_rule" ? "block" : "none") + ';">' +
+										'<div class="control-select-overlay"></div>' +
+										'<ul class="list-linked-timerule">' + template_time_rule + '</ul>' +
+										'<button class="button--select-time_rule js-control-button-time__rule" tabindex="" type="button">' +
 											'<span class="button--select--rule-inner">Настроить</span>' +
 										'</button>' +
 										'<input type="hidden" name="time_rule" value=' + val_time_rule + '>' +
@@ -705,9 +591,8 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 							'</div>' +
 					'</div>');
 
-	dp = $('.dp_settings_' + self.w_code);
-	times.mask(dp.find('.input-linked-rule__time'));
-
+					dp = $('.dp_settings_' + self.w_code);
+					times.mask(dp.find('.input-linked-rule_time'));
 					dp.on("keydown", ".js-control-date-deadline_number", function() {
 							var e = $(this);
 							setTimeout(function() {
@@ -756,7 +641,7 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 									self.deadlineAbsoluteHide();
 									self.deadlineDuringeHide();
 									self.deadlineTimeCfHide();
-									$(".control--select-time__rule").show();
+									$(".control-select-timerule").show();
 							} else {
 									self.deadlineAbsoluteHide();
 									self.deadlineDuringeHide();
@@ -783,23 +668,23 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 						var title_cf = $(this).attr("title");
 						var el = dp.find('textarea[name="comment"]');
 						var position = el.get(0).selectionEnd;
-		var comment = el.val();
-		var c_start = comment.substr(0, position);
-		var c_end = comment.substr(position);
-		el.val(c_start + title_cf + c_end);
-		el.change();
+				var comment = el.val();
+				var c_start = comment.substr(0, position);
+				var c_end = comment.substr(position);
+				el.val(c_start + title_cf + c_end);
+				el.change();
 					}).on("click", ".js-control-button-time__rule", function() {
-						dp.find('.list-linked-time__rule').show();
-						dp.find('.control--select--overlay').show();
-					}).on("click", ".control--select--overlay", function() {
+						dp.find('.list-linked-timerule').show();
+						dp.find('.control-select-overlay').show();
+					}).on("click", ".control-select-overlay", function() {
 						$(this).hide();
-						dp.find('.list-linked-time__rule').hide();
+						dp.find('.list-linked-timerule').hide();
 					}).on("change", ".js-control-input-time_rule", function() {
 						var obj_rule = {};
-						dp.find('.list-linked-time__rule .control--select--rule--item').each(function() {
+						dp.find('.list-linked-timerule .control-select-rule-item').each(function() {
 							var day = $(this).data('day');
-									var el_time = $(this).find('.input-linked-rule__time');
-							var duration = $(this).find('.input-linked-rule__duration').val();
+									var el_time = $(this).find('.input-linked-rule_time');
+							var duration = $(this).find('.input-linked-rule_duration').val();
 									var time = el_time.val();
 							if (time.length > 0) {
 											var isValid = self.isTimeIntervalValid(time);
