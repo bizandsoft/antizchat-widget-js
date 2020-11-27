@@ -31,7 +31,7 @@
 		"everywhere"
 	],
 	"dp": {
-	"action_multiple": true,
+	"action_multiple": false,
 	"webhook_url": "https://wdg.biz-crm.ru/antizchat/webhook",
 	"settings": {
 			"entity": {
@@ -46,11 +46,6 @@
 			},
 			"date_deadline_day": {
 					"name": "settings.date_deadline_day",
-					"type": "text",
-					"required": false
-			},
-			"account_year": {
-					"name": "settings.account_year",
 					"type": "text",
 					"required": false
 			},

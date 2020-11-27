@@ -593,6 +593,10 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 
 					dp = $('.dp_settings_' + self.w_code);
 					times.mask(dp.find('.input-linked-rule_time'));
+					self.deadlineAbsoluteHide();
+					self.deadlineTimeRuleHide();
+					self.deadlineTimeCfHide();
+					$(".wrap-during_time").show();
 					dp.on("keydown", ".js-control-date-deadline_number", function() {
 							var e = $(this);
 							setTimeout(function() {
@@ -614,12 +618,6 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 							}
 					}).on("controls:change", ".js-control-task_date_select .control--select--input", function() {
 							var input_val = $(this).val();
-							var el_action_account_year = dp.find('.linked-item__task-action__account_year');
-							if (input_val.length === 0) {
-									el_action_account_year.hide();
-							} else {
-									el_action_account_year.show();
-							}
 					}).on("controls:change", ".js-control-time_deadline .control--select--input", function() {
 							var input_val = $(this).val();
 							if (input_val == "now" || input_val == "today") {
