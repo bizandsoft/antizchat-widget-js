@@ -226,6 +226,8 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 
 				var dp = $(".digital-pipeline__short-task_widget-style_" + self.w_code).parent().parent();
 
+					var val_interval = dp.find('input[name="interval"]').val();
+					console.log(val_interval);
 					var val_entity = dp.find('input[name="entity"]').val();
 					var val_entity_lead_active = dp.find('input[name="entity_lead_active"]').val();
 					var val_time_deadline_field = dp.find('input[name="time_deadline_field"]').val();
@@ -239,6 +241,30 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 					var val_user_id = dp.find('input[name="user_id"]').val();
 					var val_task_type = dp.find('input[name="task_type"]').val();
 					var val_comment = dp.find('input[name="comment"]').val();
+
+					var interval_options = [{
+						id: 0,
+						option: "Без интервала"
+					},{
+							id: 1,
+							option: "1 минута"
+					},{
+							id: 3,
+							option: "3 минуты"
+					},{
+							id: 5,
+							option: "5 минут"
+					},{
+							id: 10,
+							option: "10 минут"
+					},{
+							id: 15,
+							option: "15 минут"
+					},{
+							id: 30,
+							option: "30 минут"
+					}];
+
 
 					var timeRule = {};
 					if (val_time_rule.length > 0) {
@@ -280,7 +306,7 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 							option: "Указать время",
 							is_system: true
 					}];
-		
+
 					var users = AMOCRM.constant('managers');
 					var user_options = [{
 							id: "current",
@@ -412,6 +438,15 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 											'font-size: 14px;' +
 									'}' +
 								'</style>' +
+							'<div class="form-group">' +
+									self.render({ ref: "/tmpl/controls/select.twig" }, {
+											items: interval_options,
+											name: "interval",
+											additional_data: 'style="margin-top: 0;width: 100%;"',
+											selected: val_interval,
+											selected_before: "Задать интервал: "
+									}) +
+							'</div>' +
 							'<div class="form-group">' +
 									self.render({ ref: "/tmpl/controls/select.twig" }, {
 											items: [{

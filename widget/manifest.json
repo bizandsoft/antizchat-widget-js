@@ -3,7 +3,7 @@
 		"name": "widget.name",
 		"description": "widget.description",
 		"short_description": "widget.short_description",
-		"version": "0.91",
+		"version": "0.95",
 		"interface_version": 2,
 		"init_once": false,
 		"locale": [
@@ -34,6 +34,11 @@
 	"action_multiple": false,
 	"webhook_url": "https://wdg.biz-crm.ru/antizchat/webhook",
 	"settings": {
+			"interval": {
+					"name": "settings.interval",
+					"type": "text",
+					"required": false
+			},
 			"entity": {
 					"name": "settings.entity",
 					"type": "text",
