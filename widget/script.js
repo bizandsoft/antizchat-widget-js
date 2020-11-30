@@ -227,7 +227,6 @@ define(['jquery', 'moment', 'lib/components/base/modal', "./vendor/inputmask.js"
 				var dp = $(".digital-pipeline__short-task_widget-style_" + self.w_code).parent().parent();
 
 					var val_interval = dp.find('input[name="interval"]').val();
-					console.log(val_interval);
 					var val_entity = dp.find('input[name="entity"]').val();
 					var val_entity_lead_active = dp.find('input[name="entity_lead_active"]').val();
 					var val_time_deadline_field = dp.find('input[name="time_deadline_field"]').val();
